@@ -1,32 +1,22 @@
 'use client';
 
+import { PiXBold } from 'react-icons/pi';
 import { Title, ActionIcon } from 'rizzui';
 import cn from '@/utils/class-names';
-import { PiXBold } from 'react-icons/pi';
 
-type DrawerHeaderProps = {
-  heading: string;
-  onClose: () => void;
-  headerClassName?: string;
-};
-
-export default function DrawerHeader({
-  onClose,
-  heading,
-  headerClassName,
-}: DrawerHeaderProps) {
+export default function DrawerHeader({ onClose }: { onClose: () => void }) {
   return (
-    <div
-      className={cn(
-        'mb-4 flex items-center justify-between border-b border-muted px-4 py-[14px]',
-        headerClassName
-      )}
-    >
-      <Title as="h5" className="font-semibold">
-        {heading}
+    <div className="flex items-center justify-between border-b border-muted px-5 py-3.5">
+      <Title as="h5" className={cn('font-semibold')}>
+        Settings
       </Title>
-      <ActionIcon variant="outline" onClick={onClose} className="border-0 p-0">
-        <PiXBold className="h-auto w-5" />
+      <ActionIcon
+        variant="text"
+        onClick={onClose}
+        className={cn('h-7 w-7')}
+        rounded="full"
+      >
+        <PiXBold className="h-[18px] w-[18px]" />
       </ActionIcon>
     </div>
   );
