@@ -1,220 +1,31 @@
-import Image from 'next/image';
-import { forwardRef } from 'react';
-import { Text, Title } from 'rizzui';
-import cn from '@/utils/class-names';
-import { InvoiceType } from '@/utils/validators/invoice-builder.schema';
-
-interface InvoicePrintProps {
-  data: InvoiceType;
-  totalTax: number;
-  subTotal: number;
+export default function InvoicePrint({
+  ...props
+}: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlSpace="preserve"
+      viewBox="0 0 512 512"
+      {...props}
+    >
+      <path
+        fill="#f8d77e"
+        d="M468.13 474.5H43.87A36.37 36.37 0 0 1 7.5 438.13V294.75a36.37 36.37 0 0 1 36.37-36.38h424.26a36.37 36.37 0 0 1 36.37 36.38v143.38a36.37 36.37 0 0 1-36.37 36.37z"
+      />
+      <path
+        fill="#f7b357"
+        d="M468.13 258.38h-30a36.37 36.37 0 0 1 36.37 36.37v143.38a36.37 36.37 0 0 1-36.37 36.37h30a36.37 36.37 0 0 0 36.37-36.37V294.75a36.37 36.37 0 0 0-36.37-36.38z"
+      />
+      <path fill="#f5e5c0" d="M94 7.5h324v250.87H94z" />
+      <path fill="#36c8e3" d="M66 474.5h380v30H66z" />
+      <path fill="#008fbf" d="M416 474.5h30v30h-30z" />
+      <path
+        fill="#735d65"
+        d="M433.94 359H78.06C71.4 359 66 353.6 66 346.94v-36.88C66 303.4 71.4 298 78.06 298h355.88c6.66 0 12.06 5.4 12.06 12.06v36.88c0 6.66-5.4 12.06-12.06 12.06z"
+      />
+      <path d="M468.13 250.88H425.5v-11.05a7.5 7.5 0 1 0-15 0v11.04h-309V52.5a7.5 7.5 0 1 0-15 0v198.38H43.87A43.92 43.92 0 0 0 0 294.75v101.9a7.5 7.5 0 1 0 15 0v-101.9a28.9 28.9 0 0 1 28.87-28.88h424.26A28.9 28.9 0 0 1 497 294.75v143.38A28.9 28.9 0 0 1 468.13 467H43.87A28.9 28.9 0 0 1 15 438.13v-9.9a7.5 7.5 0 1 0-15 0v9.9A43.92 43.92 0 0 0 43.87 482H58.5v22.5A7.5 7.5 0 0 0 66 512h380a7.5 7.5 0 0 0 7.5-7.5V482h14.63A43.92 43.92 0 0 0 512 438.13V294.75a43.92 43.92 0 0 0-43.87-43.88zM438.5 497h-365v-15h365v15z" />
+      <path d="M94 30a7.5 7.5 0 0 0 7.5-7.5V15h309v195a7.5 7.5 0 1 0 15 0V7.5A7.5 7.5 0 0 0 418 0H94a7.5 7.5 0 0 0-7.5 7.5v15A7.5 7.5 0 0 0 94 30z" />
+      <path d="M357.14 49.32H155.22a7.5 7.5 0 1 0 0 15h201.92a7.5 7.5 0 1 0 0-15zM364.64 100.62a7.5 7.5 0 0 0-7.5-7.5H155.22a7.5 7.5 0 1 0 0 15h201.92a7.5 7.5 0 0 0 7.5-7.5zM453.5 346.94v-36.88a19.58 19.58 0 0 0-19.56-19.56H78.06a19.58 19.58 0 0 0-19.56 19.56v36.88a19.58 19.58 0 0 0 19.56 19.56h355.88a19.58 19.58 0 0 0 19.56-19.56zm-380 0v-36.88a4.56 4.56 0 0 1 4.56-4.56h355.88a4.56 4.56 0 0 1 4.56 4.56v36.88a4.56 4.56 0 0 1-4.56 4.56H78.06a4.56 4.56 0 0 1-4.56-4.56zM131 389.15H74.5a7.5 7.5 0 1 0 0 15H131a7.5 7.5 0 1 0 0-15zM131 415.5H74.5a7.5 7.5 0 1 0 0 15H131a7.5 7.5 0 1 0 0-15zM259.27 144.84c0-8.55-6.96-15.5-15.5-15.5h-14c-8.55 0-15.5 6.95-15.5 15.5v14c0 2.93.83 5.66 2.25 8a15.38 15.38 0 0 0-2.25 8v14c0 8.55 6.95 15.5 15.5 15.5h14c8.54 0 15.5-6.95 15.5-15.5v-14c0-2.93-.84-5.66-2.25-8a15.38 15.38 0 0 0 2.25-8v-14zm-30 0c0-.27.22-.5.5-.5h14c.27 0 .5.23.5.5v14a.5.5 0 0 1-.5.5h-14a.5.5 0 0 1-.5-.5v-14zm15 44a.5.5 0 0 1-.5.5h-14a.5.5 0 0 1-.5-.5v-14c0-.27.22-.5.5-.5h14c.27 0 .5.23.5.5v14zM172.52 144.34a7.5 7.5 0 0 1 7.5 7.5 7.5 7.5 0 1 0 15 0c0-9.78-6.28-18.11-15-21.2v-3.8a7.5 7.5 0 1 0-15 0v3.8a22.54 22.54 0 0 0-15 21.2c0 12.4 10.09 22.5 22.5 22.5a7.5 7.5 0 1 1-7.5 7.5 7.5 7.5 0 1 0-15 0c0 9.78 6.27 18.12 15 21.21v3.8a7.5 7.5 0 1 0 15 0v-3.8c8.72-3.1 15-11.43 15-21.2 0-12.41-10.1-22.5-22.5-22.5a7.5 7.5 0 0 1 0-15zM279.82 129.34c-8.55 0-15.5 6.95-15.5 15.5v44c0 8.54 6.95 15.5 15.5 15.5h14c8.54 0 15.5-6.96 15.5-15.5v-44c0-8.55-6.96-15.5-15.5-15.5h-14zm14.5 15.5v44a.5.5 0 0 1-.5.5h-14a.5.5 0 0 1-.5-.5v-44c0-.28.22-.5.5-.5h14c.27 0 .5.22.5.5zM343.87 129.34h-14c-8.55 0-15.5 6.95-15.5 15.5v44c0 8.54 6.95 15.5 15.5 15.5h14c8.54 0 15.5-6.96 15.5-15.5v-44c0-8.55-6.96-15.5-15.5-15.5zm.5 59.5a.5.5 0 0 1-.5.5h-14a.5.5 0 0 1-.5-.5v-44c0-.28.22-.5.5-.5h14c.27 0 .5.22.5.5v44z" />
+    </svg>
+  );
 }
-
-export const InvoicePrint = forwardRef<HTMLDivElement, InvoicePrintProps>(
-  ({ data, totalTax, subTotal }, ref) => {
-    return (
-      <div className="hidden">
-        <div ref={ref}>
-          <div className="print-container px-16">
-            <table className="w-full">
-              <thead>
-                <tr>
-                  <td>
-                    <div className="h-10"></div>
-                  </td>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <td>
-                    {/* first section  */}
-                    <div
-                      className={cn(
-                        'flex items-center justify-end',
-                        data.logo && 'justify-between'
-                      )}
-                    >
-                      {data.logo && (
-                        <Image
-                          alt="logo"
-                          width={80}
-                          height={80}
-                          src={data.logo!}
-                          className="h-24 w-32 object-contain"
-                        />
-                      )}
-                      <div className="text-end">
-                        {data.company.name && (
-                          <Text className="text-lg font-medium text-gray-900">
-                            {data.company.name}
-                          </Text>
-                        )}
-                        <Title className="text-4xl font-semibold">
-                          {data.documentTitle}
-                        </Title>
-                      </div>
-                    </div>
-
-                    {/* second section  */}
-                    <div className="mt-12 grid grid-cols-2 gap-8">
-                      {/* left side */}
-                      <div>
-                        <Text className="mb-1 font-medium">
-                          {data.client.clientSectionLabel}
-                        </Text>
-                        <Title className="mb-3 text-xl font-semibold">
-                          {data.client.name}
-                        </Title>
-                        <div className="space-y-1">
-                          <Text>{data.client.contact}</Text>
-                          <Text>{data.client.email}</Text>
-                          <Text>{data.client.address}</Text>
-                        </div>
-                      </div>
-                      {/* right side */}
-                      <div className="text-end">
-                        <Text className="mb-1 font-medium text-gray-900">
-                          {data.invoice.InvoiceNumberLabel}
-                        </Text>
-                        <Text className="mb-5">{data.invoice.number}</Text>
-                        <Text className="mb-1 font-medium text-gray-900">
-                          {data.invoice.InvoiceDateLabel}
-                        </Text>
-                        <Text>
-                          {data.invoice.date?.toDateString() ?? '-- --'}
-                        </Text>
-                      </div>
-                    </div>
-
-                    {/* table section  */}
-                    <div className="mt-12 w-full break-inside-auto border-b">
-                      <div className="invoice-print-table-header !mb-2 grid break-inside-avoid grid-cols-12 gap-2 px-2 font-medium">
-                        <span className="col-span-4 block py-2 text-start">
-                          {data.invoiceTableHeader.title}
-                        </span>
-                        <span className="col-span-2 block py-2 text-end">
-                          {data.invoiceTableHeader.quantity}
-                        </span>
-                        <span className="col-span-2 block py-2 text-end">
-                          {data.invoiceTableHeader.rate}
-                        </span>
-                        <span className="col-span-2 block py-2 text-end">
-                          {data.invoiceTableHeader.tax}
-                        </span>
-                        <span className="col-span-2 block py-2 text-end">
-                          {data.invoiceTableHeader.amount}
-                        </span>
-                      </div>
-                      {data.invoiceTable.map((item, index) => (
-                        <div
-                          key={index}
-                          className="!mb-2 grid break-inside-avoid grid-cols-12 gap-2 px-2"
-                        >
-                          <span className="col-span-4 block py-2">
-                            {item.title}
-                          </span>
-                          <span className="col-span-2 block py-2 text-end">
-                            {item.quantity}
-                          </span>
-                          <span className="col-span-2 block py-2 text-end">
-                            {item.rate}
-                          </span>
-                          <span className="col-span-2 block py-2 text-end">
-                            {item.tax}
-                          </span>
-                          <span className="col-span-2 block py-2 text-end">
-                            {item.quantity * item.rate}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* total section  */}
-                    <div className="ms-auto mt-4 w-full max-w-[240px] break-inside-avoid divide-y font-medium">
-                      <div className="flex items-center justify-between gap-6 pb-2">
-                        <span className="block">
-                          {data.finalCalculations.subTotalLabel}
-                        </span>
-                        <span className="block text-gray-900">${subTotal}</span>
-                      </div>
-                      <div className="flex items-center justify-between gap-6 py-2">
-                        <span className="block">
-                          {data.finalCalculations.taxLabel}
-                        </span>
-                        <span className="block text-gray-900">${totalTax}</span>
-                      </div>
-                      <div className="flex items-center justify-between gap-6 pt-2">
-                        <span className="block text-gray-900">
-                          {data.finalCalculations.totalLabel}
-                        </span>
-                        <span className="block text-gray-900">
-                          ${subTotal + totalTax}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* payment section  */}
-                    <div className="break-before-auto break-inside-avoid-page space-y-2">
-                      <Text className="text-lg font-semibold text-gray-900">
-                        {data.payments.label}
-                      </Text>
-                      <Text>{data.payments.bankName}</Text>
-                      <Text>{data.payments.accountNo}</Text>
-                    </div>
-
-                    {/* note section  */}
-                    {data.note.note && (
-                      <div className="mt-12 break-before-auto break-inside-avoid-page">
-                        <Text className="mb-1 font-medium text-gray-900">
-                          {data.note.noteLabel}
-                        </Text>
-                        <Text className="break-words">{data.note.note}</Text>
-                      </div>
-                    )}
-
-                    {/* terms section  */}
-                    {data.terms.terms && (
-                      <div className="mt-12 break-before-auto break-inside-avoid-page">
-                        <Text className="mb-1 font-medium text-gray-900">
-                          {data.terms.termsLabel}
-                        </Text>
-                        <Text className="break-words">{data.terms.terms}</Text>
-                      </div>
-                    )}
-
-                    {/*signature section */}
-                    <div className="!mt-20 ms-auto grid w-full max-w-64 break-inside-avoid grid-cols-1 gap-1 text-center">
-                      <Text className="text-lg font-semibold text-gray-900">
-                        {data.signature.name}
-                      </Text>
-                      <Text className="mt-1 border-t pt-2">
-                        {data.signature.label}
-                      </Text>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-
-              {/* footer gap for every page break end */}
-              <tfoot>
-                <tr>
-                  <td>
-                    <div className="h-16"></div>
-                  </td>
-                </tr>
-              </tfoot>
-            </table>
-            {/* powered by section  */}
-            <div className="fixed bottom-4 start-0 mt-6 w-full border-t border-muted pt-4 text-center text-gray-900 dark:text-gray-0">
-              Powered By <span className="font-bold">REDQ</span>
-            </div>
-            {/* footer gap for every page break end */}
-          </div>
-        </div>
-      </div>
-    );
-  }
-);
-
-InvoicePrint.displayName = 'InvoicePrint';
