@@ -1,44 +1,43 @@
 'use client';
 
-import { Button, Loader } from 'rizzui';
-import { fileGridData } from '@/data/file-grid-data';
-import FileFilters from '@/shared/file/manager/file-filters';
-import { useGrid } from '@/shared/file/manager/file-grid/use-grid';
-import Grid from '@/shared/file/manager/file-grid/grid';
+import React from 'react';
+import { defaultColumns } from './column';
+import MainTable from '../../table/main-table';
+import WidgetCard from '@/components/cards/widget-card';
+import { Person, defaultData } from '@/data/tan-table-data';
+import { useTanStackTable } from '../custom-table-components/use-TanStack-Table';
 
-const tableDataPerPage = 30;
-
-export default function FileGrid() {
-  const {
-    isLoading,
-    paginatedData,
-    remainingItems,
-    searchTerm,
-    handleDelete,
-    handleSearch,
-    handleLoadMore,
-  } = useGrid(fileGridData, tableDataPerPage);
-
-  if (isLoading) {
-    return (
-      <div className="grid h-32 flex-grow place-content-center items-center">
-        <Loader variant="spinner" size="xl" />
-      </div>
-    );
-  }
+export default function TableRowPinning() {
+  const { table, setData } = useTanStackTable<Person>({
+    tableData: defaultData,
+    columnConfig: defaultColumns,
+    options: {
+      initialState: {
+        pagination: {
+          pageIndex: 0,
+          pageSize: 12,
+        },
+      },
+      meta: {
+        handleDeleteRow: (row) => {
+          setData((prev) => prev.filter((r) => r.id !== row.id));
+        },
+      },
+      enableColumnResizing: false,
+    },
+  });
 
   return (
     <>
-      <FileFilters onSearch={handleSearch} searchTerm={searchTerm} />
-      <Grid data={paginatedData} onDeleteItem={handleDelete} />
-
-      {remainingItems > 0 && (
-        <div className="mt-5 flex flex-col items-center xs:mt-6 sm:mt-8">
-          <Button isLoading={isLoading} onClick={() => handleLoadMore()}>
-            Load More
-          </Button>
-        </div>
-      )}
+      <WidgetCard title={'Row Pinning'} className="flex flex-col gap-4">
+        <MainTable
+          table={table}
+          variant={'modern'}
+          classNames={{
+            container: 'h-[500px]',
+          }}
+        />
+      </WidgetCard>
     </>
   );
 }
