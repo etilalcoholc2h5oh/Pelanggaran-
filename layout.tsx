@@ -1,20 +1,46 @@
-import Header from '@/layouts/hydrogen/header';
-import Sidebar from '@/layouts/hydrogen/sidebar';
+import { Toaster } from 'react-hot-toast';
+import GlobalDrawer from '@/shared/drawer-views/container';
+import GlobalModal from '@/shared/modal-views/container';
+import { ThemeProvider } from '@/shared/theme-provider';
+import { siteConfig } from '@/config/site.config';
+import { inter, lexendDeca } from '@/styles/fonts';
+import cn from '@/utils/class-names';
+import NextProgress from '@/components/next-progress';
 
-export default function HydrogenLayout({
+// styles
+import '@/styles/globals.css';
+
+export const metadata = {
+  title: siteConfig.title,
+  description: siteConfig.description,
+};
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // const session = await getServerSession(authOptions);
   return (
-    <main className="flex min-h-screen flex-grow">
-      <Sidebar className="fixed hidden xl:block dark:bg-gray-50" />
-      <div className="flex w-full flex-col xl:ms-[270px] xl:w-[calc(100%-270px)] 2xl:ms-72 2xl:w-[calc(100%-288px)]">
-        <Header />
-        <div className="flex flex-grow flex-col px-4 pb-6 pt-2 md:px-5 lg:px-6 lg:pb-8 3xl:px-8 3xl:pt-4 4xl:px-10 4xl:pb-9">
+    <html
+      lang="en"
+      dir="ltr"
+      // required this one for next-themes, remove it if you are not using next-theme
+      suppressHydrationWarning
+    >
+      <body
+        // to prevent any warning that is caused by third party extensions like Grammarly
+        suppressHydrationWarning
+        className={cn(inter.variable, lexendDeca.variable, 'font-inter')}
+      >
+        <ThemeProvider>
+          <NextProgress />
           {children}
-        </div>
-      </div>
-    </main>
+          <Toaster />
+          <GlobalDrawer />
+          <GlobalModal />
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }
