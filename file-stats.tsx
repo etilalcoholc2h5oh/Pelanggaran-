@@ -1,16 +1,13 @@
 'use client';
 
-import { Title, Text, Button } from 'rizzui';
+import { Button, Text } from 'rizzui';
 import cn from '@/utils/class-names';
-import DocIcon from '@/components/icons/doc-solid';
-import ImageIcon from '@/components/icons/image-solid';
-import MusicIcon from '@/components/icons/music-solid';
-import VideoIcon from '@/components/icons/video-solid';
-import DriveIcon from '@/components/icons/drive-solid';
 import { useScrollableSlider } from '@/hooks/use-scrollable-slider';
 import { PiCaretLeftBold, PiCaretRightBold } from 'react-icons/pi';
 import MetricCard from '@/components/cards/metric-card';
 import CircleProgressBar from '@/components/charts/circle-progressbar';
+import TrendingUpIcon from '@/components/icons/trending-up';
+import TrendingDownIcon from '@/components/icons/trending-down';
 
 type FileStatsType = {
   className?: string;
@@ -19,46 +16,101 @@ type FileStatsType = {
 const filesStatData = [
   {
     id: 1,
-    title: 'Total Storage',
-    metric: '94 GB',
-    icon: <DriveIcon className="h-12 w-10" />,
-    fill: '#4c5c75',
-    percentage: 94,
+    title: 'Total Images',
+    metric: '36,476 GB',
+    fill: '#3872FA',
+    percentage: 32,
+    increased: true,
+    decreased: false,
+    value: '+32.40',
   },
   {
     id: 2,
-    title: 'Images',
-    metric: '26 GB',
-    icon: <ImageIcon className="h-10 w-10" />,
-    fill: '#f3962d',
-    percentage: 26,
+    title: 'Total Videos',
+    metric: '53,406 GB',
+    fill: '#3872FA',
+    percentage: 48,
+    increased: false,
+    decreased: true,
+    value: '-18.45',
   },
   {
     id: 3,
-    title: 'Documents',
-    metric: '38 GB',
-    icon: <DocIcon className="h-10 w-10" />,
-    fill: '#6d98ff',
-    percentage: 38,
+    title: 'Total Documents',
+    metric: '90,875 GB',
+    fill: '#EE0000',
+    percentage: 89,
+    increased: true,
+    decreased: false,
+    value: '+20.34',
   },
   {
     id: 4,
-    title: 'Audios',
-    metric: '54 GB',
-    icon: <MusicIcon className="h-10 w-10" />,
-    fill: '#fbc13b',
+    title: 'Total Musics',
+    metric: '63,076 GB',
+    fill: '#3872FA',
     percentage: 54,
-  },
-  {
-    id: 5,
-    title: 'Videos',
-    metric: '67 GB',
-    icon: <VideoIcon className="h-10 w-10" />,
-    fill: '#e16244',
-    percentage: 67,
+    increased: true,
+    decreased: false,
+    value: '+14.45',
   },
 ];
-// @md:grid-cols-2 @2xl:grid-cols-3 @3xl:grid-cols-4 @7xl:grid-cols-5
+
+export function FileStatGrid({ className }: { className?: string }) {
+  return (
+    <>
+      {filesStatData.map((stat: any) => {
+        return (
+          <MetricCard
+            key={stat.id}
+            title={stat.title}
+            metric={stat.metric}
+            metricClassName="3xl:text-[22px]"
+            className={cn('w-full max-w-full justify-between', className)}
+            chart={
+              <CircleProgressBar
+                percentage={stat.percentage}
+                size={80}
+                stroke="#D7E3FE"
+                strokeWidth={7}
+                progressColor={stat.fill}
+                useParentResponsive={true}
+                label={
+                  <Text
+                    as="span"
+                    className="font-lexend text-base font-medium text-gray-700"
+                  >
+                    {stat.percentage}%
+                  </Text>
+                }
+                strokeClassName="dark:stroke-gray-300"
+              />
+            }
+          >
+            <Text className="mt-3 flex items-center leading-none text-gray-500">
+              <Text
+                as="span"
+                className={cn(
+                  'me-2 inline-flex items-center font-medium',
+                  stat.increased ? 'text-green' : 'text-red'
+                )}
+              >
+                {stat.increased ? (
+                  <TrendingUpIcon className="me-1 h-4 w-4" />
+                ) : (
+                  <TrendingDownIcon className="me-1 h-4 w-4" />
+                )}
+                {stat.value}%
+              </Text>
+              last month
+            </Text>
+          </MetricCard>
+        );
+      })}
+    </>
+  );
+}
+
 export default function FileStats({ className }: FileStatsType) {
   const {
     sliderEl,
@@ -80,54 +132,16 @@ export default function FileStats({ className }: FileStatsType) {
         variant="text"
         ref={sliderPrevBtn}
         onClick={() => scrollToTheLeft()}
-        className="!absolute left-0 top-0 z-10 !h-full w-8 !justify-start rounded-none bg-gradient-to-r from-white via-white to-transparent px-0  text-gray-500 hover:text-black 3xl:hidden dark:from-gray-50/80 dark:via-gray-50/80"
+        className="!absolute -left-1 top-0 z-10 !h-full w-20 !justify-start rounded-none bg-gradient-to-r from-gray-0 via-gray-0/70 to-transparent px-0 ps-1 text-gray-500 hover:text-gray-900 3xl:hidden dark:from-gray-50 dark:via-gray-50/70"
       >
         <PiCaretLeftBold className="h-5 w-5" />
       </Button>
       <div className="w-full overflow-hidden">
         <div
           ref={sliderEl}
-          className="custom-scrollbar-x grid grid-flow-col gap-5 overflow-x-auto scroll-smooth"
+          className="custom-scrollbar-x grid grid-flow-col gap-5 overflow-x-auto scroll-smooth 2xl:gap-6 3xl:gap-8"
         >
-          {filesStatData.map((stat: any) => {
-            return (
-              <MetricCard
-                key={stat.id}
-                title=""
-                metric=""
-                className="min-w-[292px] max-w-full flex-row-reverse"
-              >
-                <div className="flex items-center justify-start gap-5">
-                  <div className="w-14">
-                    <CircleProgressBar
-                      percentage={stat.percentage}
-                      size={80}
-                      stroke="#D7E3FE"
-                      strokeWidth={5}
-                      progressColor={stat.fill}
-                      useParentResponsive={true}
-                      label={stat.icon}
-                      strokeClassName="dark:stroke-gray-300"
-                    />
-                  </div>
-                  <div className="">
-                    <Text className="mb-1 text-sm font-medium text-gray-500">
-                      {stat.title}
-                    </Text>
-                    <Title
-                      as="h4"
-                      className="mb-1 text-xl font-semibold text-gray-900"
-                    >
-                      {stat.metric}
-                      <span className="inline-block text-sm font-normal text-gray-500">
-                        &nbsp;of 100 GB
-                      </span>
-                    </Title>
-                  </div>
-                </div>
-              </MetricCard>
-            );
-          })}
+          <FileStatGrid className="min-w-[292px]" />
         </div>
       </div>
       <Button
@@ -135,7 +149,7 @@ export default function FileStats({ className }: FileStatsType) {
         variant="text"
         ref={sliderNextBtn}
         onClick={() => scrollToTheRight()}
-        className="!absolute right-0 top-0 z-10 !h-full w-8 !justify-end rounded-none bg-gradient-to-l from-white via-white to-transparent px-0  text-gray-500 hover:text-black 3xl:hidden dark:from-gray-50/80 dark:via-gray-50/80"
+        className="!absolute right-0 top-0 z-10 !h-full w-20 !justify-end rounded-none bg-gradient-to-l from-gray-0 via-gray-0/70 to-transparent px-0 text-gray-500 hover:text-gray-900 3xl:hidden dark:from-gray-50 dark:via-gray-50/70"
       >
         <PiCaretRightBold className="h-5 w-5" />
       </Button>

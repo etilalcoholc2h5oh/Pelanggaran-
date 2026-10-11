@@ -2,28 +2,29 @@
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { Modal } from 'rizzui';
-import { useModal } from '@/shared/modal-views/use-modal';
+import { Drawer } from 'rizzui';
+import { useDrawer } from '@/shared/drawer-views/use-drawer';
+import cn from '@/utils/class-names';
 
-export default function GlobalModal() {
-  const { isOpen, view, closeModal, customSize, size } = useModal();
+export default function GlobalDrawer() {
+  const { isOpen, view, placement, customSize, closeDrawer } = useDrawer();
   const pathname = usePathname();
   useEffect(() => {
-    closeModal();
+    closeDrawer();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   return (
-    <Modal
+    <Drawer
       isOpen={isOpen}
-      onClose={closeModal}
+      onClose={closeDrawer}
+      placement={placement}
       customSize={customSize}
-      size={size}
-      overlayClassName="dark:bg-opacity-40 dark:backdrop-blur-lg"
-      containerClassName="dark:bg-gray-100"
-      className="z-[9999] [&_.pointer-events-none]:overflow-visible"
+      overlayClassName="dark:bg-opacity-40 dark:backdrop-blur-md"
+      containerClassName={'dark:bg-gray-100'}
+      className="z-[9999]"
     >
       {view}
-    </Modal>
+    </Drawer>
   );
 }
